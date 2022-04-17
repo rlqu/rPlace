@@ -9,6 +9,7 @@ import me.jannik.rplace.command.SetupCommand;
 import me.jannik.rplace.scoreboard.PlayerScoreboard;
 import me.jannik.rplace.utils.Configuration;
 import me.jannik.rplace.utils.Defaults;
+import me.jannik.rplace.utils.MessageIgnore;
 import me.jannik.rplace.utils.PlacePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -30,6 +31,7 @@ public class Place extends JavaPlugin {
     @Getter private static Place instance;
     @Setter private Configuration configuration;
 
+    private MessageIgnore messageIgnore;
     private Defaults defaults;
     private HashMap<String, PlacePlayer> players;
     private HashMap<String, PlayerScoreboard> scoreboards;
@@ -44,6 +46,7 @@ public class Place extends JavaPlugin {
         build = new ArrayList<>();
         scoreboards = new HashMap<>();
         defaults = new Defaults();
+        messageIgnore = new MessageIgnore();
 
         register();
         getCommand("build").setExecutor(new BuildCommand());

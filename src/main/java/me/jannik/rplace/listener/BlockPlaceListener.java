@@ -14,11 +14,9 @@ import java.util.ArrayList;
 public class BlockPlaceListener implements Listener {
 
     private final Place place;
-    private final ArrayList<String> ignoreMessages;
 
     public BlockPlaceListener() {
         place = Place.getInstance();
-        ignoreMessages = new ArrayList<>();
     }
 
     @EventHandler
@@ -28,11 +26,9 @@ public class BlockPlaceListener implements Listener {
 
         if(!getPlace().getBuild().contains(player.getName())) {
             event.setCancelled(true);
-            if(!getIgnoreMessages().contains(player.getName())) {
+            if(!place.getMessageIgnore().isIgnoring(player, "how-to")) {
                 player.sendMessage(getPlace().getConfiguration().getMessage("how-to"));
-
-                getIgnoreMessages().add(player.getName());
-                Bukkit.getScheduler().runTaskLater(getPlace(), () -> getIgnoreMessages().remove(player.getName()), 20L * getPlace().getConfiguration().getIgnoreMessageCountdown());
+                place.getMessageIgnore().put(player, "how-to");
             }
         }
     }
