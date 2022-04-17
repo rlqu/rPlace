@@ -49,7 +49,6 @@ public class Defaults {
         getDefaultMessages().put("scoreboard-line-15", "null");
         getDefaultMessages().put("actionbar", "§6r§8/§6Place §7by §ohttps://github.com/rlqu");
 
-
     }
 
     public String getMessage(String key) {
