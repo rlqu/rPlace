@@ -94,6 +94,11 @@ public class Place extends JavaPlugin {
     }
     public void reload() throws IOException {
         YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(getConfiguration().getFile());
+
+        getConfiguration().setCanDropItems(yamlConfiguration.getBoolean("place-drop-items"));
+        getConfiguration().setCanInteract(yamlConfiguration.getBoolean("place-interactions"));
+        getConfiguration().setCanInteract(yamlConfiguration.getBoolean("place-pick-up-items"));
+        getConfiguration().setCanTakeDamage(yamlConfiguration.getBoolean("place-damage"));
         getConfiguration().setCountdown(yamlConfiguration.getInt("place-countdown"));
         getConfiguration().setIgnoreMessageCountdown(yamlConfiguration.getInt("place-ignore-message-countdown"));
         getConfiguration().setTeleportOnJoin(yamlConfiguration.getBoolean("place-teleport-spawn"));

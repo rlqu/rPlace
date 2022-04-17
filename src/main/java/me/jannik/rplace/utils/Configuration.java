@@ -5,10 +5,7 @@ import lombok.Setter;
 import me.jannik.rplace.Place;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.material.MaterialData;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +24,10 @@ public class Configuration {
     @Setter private YamlConfiguration configuration;
     @Setter private Location spawnLocation;
     @Setter private boolean teleportOnJoin;
+    @Setter private boolean canDropItems;
+    @Setter private boolean canTakeDamage;
+    @Setter private boolean canPickUpItems;
+    @Setter private boolean canInteract;
     @Setter private int countdown;
     @Setter private int ignoreMessageCountdown;
 
@@ -48,6 +49,10 @@ public class Configuration {
         setDefaultValue("place-countdown", 20);
         setDefaultValue("place-ignore-message-countdown", 3);
         setDefaultValue("place-teleport-spawn", true);
+        setDefaultValue("place-drop-items", false);
+        setDefaultValue("place-pick-up-items", false);
+        setDefaultValue("place-interactions", false);
+        setDefaultValue("place-damage", false);
 
         setDefaultValue("message.prefix", "§8[§6r/Place§8]§7");
         setDefaultValue("message.no-perms", "%prefix% You are not permitted to do that.");
@@ -93,13 +98,22 @@ public class Configuration {
                                  185, 186, 187, 324, 330, 331, 356, 404, 427, 428, 429, 430, 431, 27, 28, 66, 157, 138,
                                  378, 379, 380, 7, 12, 13, 20);
 
-        spawnLocation = new Location(Bukkit.getWorld(getConfiguration().getString("spawn-location.world")), getConfiguration().getDouble("spawn-location.x"), getConfiguration().getDouble("spawn-location.y"), getConfiguration().getDouble("spawn-location.z"), (float) getConfiguration().getDouble("spawn-location.yaw"), (float) getConfiguration().getDouble("spawn-location.pitch"));
+        spawnLocation = new Location(Bukkit.getWorld(getConfiguration().getString("spawn-location.world")),
+                        getConfiguration().getDouble("spawn-location.x"),
+                        getConfiguration().getDouble("spawn-location.y"),
+                        getConfiguration().getDouble("spawn-location.z"),
+                        (float) getConfiguration().getDouble("spawn-location.yaw"),
+                        (float) getConfiguration().getDouble("spawn-location.pitch"));
+
         initializeMessages();
         initializeForbiddenMaterials();
 
         teleportOnJoin = getConfiguration().getBoolean("place-teleport-spawn");
         countdown = getConfiguration().getInt("place-countdown");
         ignoreMessageCountdown = getConfiguration().getInt("place-ignore-message-countdown") + 1;
+        canInteract = getConfiguration().getBoolean("place-interactions");
+        canPickUpItems = getConfiguration().getBoolean("place-pick-up-items");
+        canDropItems = getConfiguration().getBoolean("place-drop-items");
 
     }
 
