@@ -1,5 +1,6 @@
 package me.jannik.rplace;
 
+import jdk.nashorn.internal.runtime.regexp.joni.Config;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -15,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.reflections.Reflections;
@@ -64,10 +66,22 @@ public class Place extends JavaPlugin {
             }
         }, 0L, 20L);
 
-        Bukkit.getOnlinePlayers().forEach(player -> {
-            player.setGameMode(GameMode.CREATIVE);
-            if(!getPlayers().containsKey(player.getName())) getPlayers().put(player.getName(), new PlacePlayer(player));
-        });
+        Bukkit.getScheduler().runTaskLater(getInstance(), () -> {
+
+            Bukkit.getOnlinePlayers().forEach(player -> {
+                player.setGameMode(GameMode.CREATIVE);
+                if(!getPlayers().containsKey(player.getName())) getPlayers().put(player.getName(), new PlacePlayer(player));
+            });
+
+            if(!getConfiguration().isShouldSpawnCreatures()) {
+                Bukkit.getWorld(getConfiguration().getSpawnLocation().getWorld().getName()).getEntities().forEach(entity -> {
+                    if(entity.getType() != EntityType.ARMOR_STAND && entity.getType() != EntityType.PLAYER) {
+                        entity.remove();
+                    }
+                });
+            }
+
+        }, 3);
     }
 
     @Override

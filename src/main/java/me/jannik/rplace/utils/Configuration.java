@@ -28,6 +28,7 @@ public class Configuration {
     @Setter private boolean canTakeDamage;
     @Setter private boolean canPickUpItems;
     @Setter private boolean canInteract;
+    @Setter private boolean shouldSpawnCreatures;
     @Setter private int countdown;
     @Setter private int ignoreMessageCountdown;
 
@@ -53,6 +54,7 @@ public class Configuration {
         setDefaultValue("place-pick-up-items", false);
         setDefaultValue("place-interactions", false);
         setDefaultValue("place-damage", false);
+        setDefaultValue("place-creatures", false);
 
         setDefaultValue("message.prefix", "§8[§6r/Place§8]§7");
         setDefaultValue("message.no-perms", "%prefix% You are not permitted to do that.");
@@ -114,6 +116,7 @@ public class Configuration {
         canInteract = getConfiguration().getBoolean("place-interactions");
         canPickUpItems = getConfiguration().getBoolean("place-pick-up-items");
         canDropItems = getConfiguration().getBoolean("place-drop-items");
+        shouldSpawnCreatures = getConfiguration().getBoolean("place-creatures");
 
     }
 
