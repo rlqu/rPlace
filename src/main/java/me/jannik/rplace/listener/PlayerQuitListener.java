@@ -18,7 +18,7 @@ public class PlayerQuitListener implements Listener {
     @EventHandler
     public void handlePlayerQuit(PlayerQuitEvent event) {
 
-        String quitMessage = getPlace().getConfiguration().getMessage("quit-message");
+        String quitMessage = getPlace().getConfiguration().getMessage("quit-message").replaceAll("%PLAYER_NAME%", event.getPlayer().getName());
         event.setQuitMessage(quitMessage.equalsIgnoreCase("null") ? null : quitMessage);
 
         if(getPlace().getPlayers().containsKey(event.getPlayer().getName())) {

@@ -19,7 +19,7 @@ public class PlayerJoinListener implements Listener {
     @EventHandler
     public void handlePlayerJoin(PlayerJoinEvent event) {
 
-        String joinMessage = getPlace().getConfiguration().getMessage("join-message");
+        String joinMessage = getPlace().getConfiguration().getMessage("join-message").replaceAll("%PLAYER_NAME%", event.getPlayer().getName());
         event.setJoinMessage(joinMessage.equalsIgnoreCase("null") ? null : joinMessage);
 
         Bukkit.getScheduler().runTaskLater(getPlace(), () -> {
