@@ -1,0 +1,13 @@
+name: Place
+version: 0.1
+author: Jannik
+main: me.jannik.rplace.Place
+
+commands:
+  build:
+  reloadplace:
+    aliases:
+      - rlp
+      - rlplace
+      - reloadp
+  setup:
