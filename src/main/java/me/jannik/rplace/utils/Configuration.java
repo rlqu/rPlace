@@ -52,9 +52,9 @@ public class Configuration {
         setDefaultValue("place-teleport-spawn", true);
         setDefaultValue("place-drop-items", false);
         setDefaultValue("place-pick-up-items", false);
-        setDefaultValue("place-interactions", false);
-        setDefaultValue("place-damage", false);
-        setDefaultValue("place-creatures", false);
+        setDefaultValue("place-interactions", true);
+        setDefaultValue("place-damage", true);
+        setDefaultValue("place-creatures", true);
 
         setDefaultValue("message.prefix", "§8[§6r/Place§8]§7");
         setDefaultValue("message.no-perms", "%prefix% You are not permitted to do that.");
@@ -132,9 +132,7 @@ public class Configuration {
         YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(getFile());
         getMessages().clear();
 
-        yamlConfiguration.getConfigurationSection("message").getKeys(true).forEach(key -> {
-            getMessages().put(key, yamlConfiguration.getString("message." + key));
-        });
+        yamlConfiguration.getConfigurationSection("message").getKeys(true).forEach(key -> getMessages().put(key, yamlConfiguration.getString("message." + key)));
     }
     public void initializeForbiddenMaterials() {
 
