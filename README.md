@@ -11,6 +11,10 @@ There you can configure
 - message cooldown
 - forbidden blocks/materials
 - all messages
+- damage
+- pickup, drop items
+- interaction with blocks
+- mob spawns
 
 Ingame you can configure the spawn location per command (`/setup spawn`) and the worldborder per command aswell (`/setup worldborder <Size>/off`). You also can configure the scoreboard. Just write `null` to get a line not displayed in it. The forbidden materials you can configure in the config.yml-File, just write the item id without the subid and save the file. To apply the changes, simply execute `/reloadplace`, `/rlp` or `/reloadp` in the chat.
 
