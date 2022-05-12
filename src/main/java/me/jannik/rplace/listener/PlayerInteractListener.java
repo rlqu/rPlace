@@ -24,11 +24,13 @@ public class PlayerInteractListener implements Listener {
     @EventHandler
     public void handlePlayerInteract(PlayerInteractEvent event) {
 
+        Player player = event.getPlayer();
+
         if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if(place.getConfiguration().getPlacementMethod() == PlacementMethod.BUILD) {
 
+                event.setCancelled(true);
                 Block block = event.getClickedBlock();
-                Player player = event.getPlayer();
 
                 if(player.getItemInHand().getType() == Material.AIR || player.getItemInHand().getType() == null) {
                     return;
@@ -73,6 +75,12 @@ public class PlayerInteractListener implements Listener {
                     place.getMessageIgnore().put(player, "block-placed");
                 }
 
+                return;
+            }
+
+            if(!place.getMessageIgnore().isIgnoring(player, "how-to")) {
+                player.sendMessage(getPlace().getConfiguration().getMessage("how-to"));
+                place.getMessageIgnore().put(player, "how-to");
             }
         }
 
