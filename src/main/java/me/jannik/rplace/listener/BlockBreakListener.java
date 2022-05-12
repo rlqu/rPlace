@@ -3,6 +3,7 @@ package me.jannik.rplace.listener;
 import lombok.Getter;
 import me.jannik.rplace.Place;
 import me.jannik.rplace.utils.PlacePlayer;
+import me.jannik.rplace.utils.PlacementMethod;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -28,6 +29,10 @@ public class BlockBreakListener implements Listener {
         }
 
         event.setCancelled(true);
+
+        if(getPlace().getConfiguration().getPlacementMethod() != PlacementMethod.BREAK) {
+            return;
+        }
 
         if(player.getItemInHand().getType() == Material.AIR || player.getItemInHand().getType() == null) {
             return;

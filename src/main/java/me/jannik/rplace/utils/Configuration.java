@@ -31,6 +31,7 @@ public class Configuration {
     @Setter private boolean shouldSpawnCreatures;
     @Setter private int countdown;
     @Setter private int ignoreMessageCountdown;
+    @Setter private PlacementMethod placementMethod;
 
     public Configuration(String path, String child) throws IOException {
         place = Place.getInstance();
@@ -55,6 +56,7 @@ public class Configuration {
         setDefaultValue("place-interactions", true);
         setDefaultValue("place-damage", true);
         setDefaultValue("place-creatures", true);
+        setDefaultValue("place-method", "BREAK");
 
         setDefaultValue("message.prefix", "§8[§6r/Place§8]§7");
         setDefaultValue("message.no-perms", "%prefix% You are not permitted to do that.");
@@ -117,6 +119,13 @@ public class Configuration {
         canPickUpItems = getConfiguration().getBoolean("place-pick-up-items");
         canDropItems = getConfiguration().getBoolean("place-drop-items");
         shouldSpawnCreatures = getConfiguration().getBoolean("place-creatures");
+
+        try {
+            placementMethod = PlacementMethod.valueOf(getConfiguration().getString("place-method"));
+        } catch(Exception exception) {
+            Bukkit.getConsoleSender().sendMessage("[CONFIG ERROR] You have to set the placement method again. An error occurred while trying to fetch it. Just write the keyword 'BUILD' or 'BREAK' in the config at the point 'place-method' and restart the server. Now the placement method is the default one - break. Thank you, have a nice day!");
+            placementMethod = PlacementMethod.BREAK;
+        }
 
     }
 

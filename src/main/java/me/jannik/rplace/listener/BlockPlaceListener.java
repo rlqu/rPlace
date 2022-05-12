@@ -2,6 +2,7 @@ package me.jannik.rplace.listener;
 
 import lombok.Getter;
 import me.jannik.rplace.Place;
+import me.jannik.rplace.utils.PlacementMethod;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,7 +27,7 @@ public class BlockPlaceListener implements Listener {
 
         if(!getPlace().getBuild().contains(player.getName())) {
             event.setCancelled(true);
-            if(!place.getMessageIgnore().isIgnoring(player, "how-to")) {
+            if(place.getConfiguration().getPlacementMethod() != PlacementMethod.BUILD && !place.getMessageIgnore().isIgnoring(player, "how-to")) {
                 player.sendMessage(getPlace().getConfiguration().getMessage("how-to"));
                 place.getMessageIgnore().put(player, "how-to");
             }
