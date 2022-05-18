@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -102,29 +103,29 @@ public class Configuration {
                                  185, 186, 187, 324, 330, 331, 356, 404, 427, 428, 429, 430, 431, 27, 28, 66, 157, 138,
                                  378, 379, 380, 7, 12, 13, 20);
 
-        spawnLocation = new Location(Bukkit.getWorld(getConfiguration().getString("spawn-location.world")),
-                        getConfiguration().getDouble("spawn-location.x"),
-                        getConfiguration().getDouble("spawn-location.y"),
-                        getConfiguration().getDouble("spawn-location.z"),
-                        (float) getConfiguration().getDouble("spawn-location.yaw"),
-                        (float) getConfiguration().getDouble("spawn-location.pitch"));
+        setSpawnLocation(new Location(Bukkit.getWorld(getConfiguration().getString("spawn-location.world")),
+                getConfiguration().getDouble("spawn-location.x"),
+                getConfiguration().getDouble("spawn-location.y"),
+                getConfiguration().getDouble("spawn-location.z"),
+                (float) getConfiguration().getDouble("spawn-location.yaw"),
+                (float) getConfiguration().getDouble("spawn-location.pitch")));
 
         initializeMessages();
         initializeForbiddenMaterials();
 
-        teleportOnJoin = getConfiguration().getBoolean("place-teleport-spawn");
-        countdown = getConfiguration().getInt("place-countdown");
-        ignoreMessageCountdown = getConfiguration().getInt("place-ignore-message-countdown") + 1;
-        canInteract = getConfiguration().getBoolean("place-interactions");
-        canPickUpItems = getConfiguration().getBoolean("place-pick-up-items");
-        canDropItems = getConfiguration().getBoolean("place-drop-items");
-        shouldSpawnCreatures = getConfiguration().getBoolean("place-creatures");
+        setTeleportOnJoin(getConfiguration().getBoolean("place-teleport-spawn"));
+        setCountdown(getConfiguration().getInt("place-countdown"));
+        setIgnoreMessageCountdown(getConfiguration().getInt("place-ignore-message-countdown") + 1);
+        setCanInteract(getConfiguration().getBoolean("place-interactions"));
+        setCanPickUpItems(getConfiguration().getBoolean("place-pick-up-items"));
+        setCanDropItems(getConfiguration().getBoolean("place-drop-items"));
+        setShouldSpawnCreatures(getConfiguration().getBoolean("place-creatures"));
 
         try {
-            placementMethod = PlacementMethod.valueOf(getConfiguration().getString("place-method"));
+            setPlacementMethod(PlacementMethod.valueOf(getConfiguration().getString("place-method")));
         } catch(Exception exception) {
             Bukkit.getConsoleSender().sendMessage("[CONFIG ERROR] You have to set the placement method again. An error occurred while trying to fetch it. Just write the keyword 'BUILD' or 'BREAK' in the config at the point 'place-method' and restart the server. Now the placement method is the default one - break. Thank you, have a nice day!");
-            placementMethod = PlacementMethod.BREAK;
+            setPlacementMethod(PlacementMethod.BREAK);
         }
 
     }

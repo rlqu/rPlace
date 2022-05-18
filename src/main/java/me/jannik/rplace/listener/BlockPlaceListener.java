@@ -27,9 +27,9 @@ public class BlockPlaceListener implements Listener {
 
         if(!getPlace().getBuild().contains(player.getName())) {
             event.setCancelled(true);
-            if(place.getConfiguration().getPlacementMethod() != PlacementMethod.BUILD && !place.getMessageIgnore().isIgnoring(player, "how-to")) {
+            if(getPlace().getConfiguration().getPlacementMethod() != PlacementMethod.BUILD && !getPlace().getMessageIgnore().isIgnoring(player, "how-to")) {
                 player.sendMessage(getPlace().getConfiguration().getMessage("how-to"));
-                place.getMessageIgnore().put(player, "how-to");
+                getPlace().getMessageIgnore().put(player, "how-to");
             }
         }
     }

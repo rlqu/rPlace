@@ -25,7 +25,7 @@ public class PlayerInteractListener implements Listener {
     public void handlePlayerInteract(PlayerInteractEvent event) {
 
         if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            if(place.getConfiguration().getPlacementMethod() == PlacementMethod.BUILD) {
+            if(getPlace().getConfiguration().getPlacementMethod() == PlacementMethod.BUILD) {
 
                 Block block = event.getClickedBlock();
                 Player player = event.getPlayer();
@@ -39,27 +39,27 @@ public class PlayerInteractListener implements Listener {
                 placePlayer = getPlace().getPlayers().get(player.getName());
 
                 if(placePlayer.getCurrentCountdown() > 0) {
-                    if(!place.getMessageIgnore().isIgnoring(player, "cooldown")) {
+                    if(!getPlace().getMessageIgnore().isIgnoring(player, "cooldown")) {
                         placePlayer.sendMessage(getPlace().getConfiguration().getMessage("cooldown").replaceAll("%COOLDOWN%", String.valueOf(placePlayer.getCurrentCountdown())));
-                        place.getMessageIgnore().put(player, "cooldown");
+                        getPlace().getMessageIgnore().put(player, "cooldown");
                     }
                     return;
                 }
 
                 if(block.getType() == player.getItemInHand().getType()) {
 
-                    if(!place.getMessageIgnore().isIgnoring(player, "already-typeof")) {
+                    if(!getPlace().getMessageIgnore().isIgnoring(player, "already-typeof")) {
                         placePlayer.sendMessage(getPlace().getConfiguration().getMessage("already-typeof").replaceAll("%MATERIAL%", String.valueOf(player.getItemInHand().getType())));
-                        place.getMessageIgnore().put(player, "already-typeof");
+                        getPlace().getMessageIgnore().put(player, "already-typeof");
                     }
 
                     return;
                 }
 
                 if(!player.getItemInHand().getType().isBlock() || getPlace().getConfiguration().getForbiddenMaterials().contains(player.getItemInHand().getType().getId())) {
-                    if(!place.getMessageIgnore().isIgnoring(player, "cant-place-block")) {
+                    if(!getPlace().getMessageIgnore().isIgnoring(player, "cant-place-block")) {
                         placePlayer.sendMessage(getPlace().getConfiguration().getMessage("cant-place-block").replaceAll("%MATERIAL%", String.valueOf(player.getItemInHand().getType().toString())));
-                        place.getMessageIgnore().put(player, "cant-place-block");
+                        getPlace().getMessageIgnore().put(player, "cant-place-block");
                     }
                     return;
                 }
@@ -68,9 +68,9 @@ public class PlayerInteractListener implements Listener {
                 placePlayer.setBlocksPlaced(placePlayer.getBlocksPlaced() + 1);
                 placePlayer.setCurrentCountdown(getPlace().getConfiguration().getCountdown());
 
-                if(!place.getMessageIgnore().isIgnoring(player, "block-placed")) {
+                if(!getPlace().getMessageIgnore().isIgnoring(player, "block-placed")) {
                     placePlayer.sendMessage(getPlace().getConfiguration().getMessage("block-placed").replaceAll("%MATERIAL%", String.valueOf(player.getItemInHand().getType().toString())));
-                    place.getMessageIgnore().put(player, "block-placed");
+                    getPlace().getMessageIgnore().put(player, "block-placed");
                 }
 
             }
