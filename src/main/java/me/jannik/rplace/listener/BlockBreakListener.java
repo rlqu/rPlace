@@ -31,6 +31,10 @@ public class BlockBreakListener implements Listener {
         event.setCancelled(true);
 
         if(getPlace().getConfiguration().getPlacementMethod() != PlacementMethod.BREAK) {
+            if(!place.getMessageIgnore().isIgnoring(player, "how-to")) {
+                player.sendMessage(getPlace().getConfiguration().getMessage("how-to"));
+                place.getMessageIgnore().put(player, "how-to");
+            }
             return;
         }
 

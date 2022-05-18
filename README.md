@@ -4,7 +4,7 @@ Go to releases and download the newest version to play it on your server.
 
 It's simple to set up, just drag the .jar-File in your 'plugins' folder. The config.yml-File will be created automatically. 
 
-There you can configure
+There you can configure:
 - spawn location
 - teleport to spawn on join
 - block place cooldown
@@ -15,6 +15,7 @@ There you can configure
 - pickup, drop items
 - interaction with blocks
 - mob spawns
+- block placement method
 
 Ingame you can configure the spawn location per command (`/setup spawn`) and the worldborder per command aswell (`/setup worldborder <Size>/off`). You also can configure the scoreboard. Just write `null` to get a line not displayed in it. The forbidden materials you can configure in the config.yml-File, just write the item id without the subid and save the file. To apply the changes, simply execute `/reloadplace`, `/rlp` or `/reloadp` in the chat.
 
@@ -27,4 +28,3 @@ Alternatively you can just give yourself OP or '*'-rights on your server to get 
 The build mode is to build without cooldown, without forbidden materials and also with right click.
 
 Stay tuned for new updates, I'll upload them here.
-Happy easter! 🐰
