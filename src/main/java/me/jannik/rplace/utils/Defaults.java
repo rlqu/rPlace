@@ -47,7 +47,7 @@ public class Defaults {
         getDefaultMessages().put("scoreboard-line-13", "null");
         getDefaultMessages().put("scoreboard-line-14", "null");
         getDefaultMessages().put("scoreboard-line-15", "null");
-        getDefaultMessages().put("actionbar", "§6r§8/§6Place §7by §ohttps://github.com/rlqu");
+        getDefaultMessages().put("actionbar", "§6r§8/§6Place §7by §ohttps://github.com/xwhs");
 
     }
 
