@@ -95,7 +95,7 @@ public class Configuration {
         setDefaultValue("message.scoreboard-line-13", "null");
         setDefaultValue("message.scoreboard-line-14", "null");
         setDefaultValue("message.scoreboard-line-15", "null");
-        setDefaultValue("message.actionbar", "§6r§8/§6Place §7by §7§ohttps://github.com/rlqu");
+        setDefaultValue("message.actionbar", "§6r§8/§6Place §7by §7§ohttps://github.com/xwhs");
         setDefaultForbiddenItems(44, 53, 67, 95, 108, 109, 114, 126, 128, 134, 135, 136, 139, 156, 164, 180, 182, 6, 30,
                                  31, 32, 37, 38, 39, 40, 50, 54, 65, 78, 81, 85, 97, 101, 102, 106, 111, 113, 116, 120,
                                  130, 145, 146, 160, 171, 175, 188, 189, 190, 191, 192, 321, 323, 355, 389, 390, 397,
